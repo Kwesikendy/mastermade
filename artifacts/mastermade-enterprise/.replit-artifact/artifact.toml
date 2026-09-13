@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MasterMade Enterprise Solutions"
+description = "A polished, responsive brochure website for MasterMade Enterprise Solutions, showcasing practical technology services alongside its Shito and Tom Brown food products."
+version = "1.0.0"
+id = "artifacts/mastermade-enterprise"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24102
+
+[services.development]
+run = "pnpm --filter @workspace/mastermade-enterprise run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mastermade-enterprise", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mastermade-enterprise/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24102"
+BASE_PATH = "/"
