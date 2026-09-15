@@ -226,13 +226,32 @@ function CoreServices() {
           whileInView={{ opacity: 1, x: 0 }} 
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className="relative"
+          className="relative mt-8 lg:mt-0"
         >
-          <div className="absolute inset-0 bg-emerald-500/10 blur-[80px] rounded-full"></div>
+          <div className="absolute inset-0 bg-emerald-500/20 blur-[80px] rounded-full"></div>
+          
           <img 
             src="/assets/software-dashboard.png" 
             alt="Software Dashboard" 
             className="w-full shadow-2xl rounded-2xl border border-slate-200 relative z-10" 
+          />
+
+          {/* Floating Tablet */}
+          <motion.img 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            src="/assets/tablet.png" 
+            alt="Tablet Mockup"
+            className="absolute -bottom-10 -left-6 md:-left-12 w-[140px] md:w-[200px] lg:w-[240px] z-20 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
+          />
+
+          {/* Floating Phone */}
+          <motion.img 
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            src="/assets/phone-mockup-removebg-preview.png" 
+            alt="Phone Mockup"
+            className="absolute -top-8 -right-4 md:-right-8 lg:-right-12 w-[80px] md:w-[120px] lg:w-[150px] z-20 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
           />
         </motion.div>
 
