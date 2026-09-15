@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterMade Enterprise Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'sans-serif'],
+                        display: ['"Syne"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cream: '#FDFBF7',
+                            dark: '#1c1917',
+                            green: '#0f766e',
+                            gold: '#d97706'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1c1917;
+            overflow-x: hidden;
+        }
+        
+        .light-glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .light-glass-panel:hover {
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(15, 118, 110, 0.15), 0 5px 15px rgba(217, 119, 6, 0.1);
+        }
+        
+        .glossy-pill {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 4px 15px rgba(13, 148, 136, 0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glossy-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 8px 25px rgba(13, 148, 136, 0.5);
+        }
+
+        .glossy-pill-gold {
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 4px 15px rgba(245, 158, 11, 0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glossy-pill-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Fallback for JS disabled or before script runs */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* State applied by JS immediately, then transitions back to normal when active */
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 800ms ease, transform 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative">
+
+    <!-- FIXED BACKGROUND LAYER FOR GLASSMORPHISM -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-brand-cream">
+        <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-teal-500/20 rounded-full blur-[120px] mix-blend-multiply opacity-70"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-amber-500/20 rounded-full blur-[100px] mix-blend-multiply opacity-60"></div>
+        <div class="absolute top-[40%] left-[30%] w-[30vw] h-[30vw] bg-emerald-500/10 rounded-full blur-[80px] mix-blend-multiply opacity-50"></div>
+    </div>
+
+    <!-- MAIN UI LAYER -->
+    <div class="relative z-10">
+        <!-- Navbar -->
+        <nav class="fixed w-full z-50 top-0 pt-4 px-4 sm:px-6">
+            <div class="max-w-7xl mx-auto bg-[#E8EAE6] shadow-sm rounded-full px-6 py-4 flex items-center justify-between transition-all border border-black/5">
+                <div class="flex items-center gap-3">
+                    <!-- Updated with Image tag as requested, pointing to real asset path -->
+                    <img src="../mastermade-enterprise/public/assets/Picture1.jpg" alt="MasterMade Logo" class="h-10 w-auto rounded-lg shadow-sm border border-black/10 mix-blend-multiply">
+                    <span class="font-bold font-display text-xl tracking-tight hidden sm:block text-brand-dark">
+                        MasterMade<span class="text-brand-green">.</span>
+                    </span>
+                </div>
+                <div class="hidden md:flex gap-8 text-sm font-medium text-stone-600">
+                    <a href="#services" class="hover:text-brand-green transition-colors">Tech Services</a>
+                    <a href="#pantry" class="hover:text-brand-green transition-colors">The Pantry</a>
+                    <a href="#contact" class="hover:text-brand-green transition-colors">Contact</a>
+                </div>
+                <a href="#contact" class="glossy-pill px-6 py-2 rounded-full font-semibold text-sm text-white">
+                    Get a Quote
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="pt-40 pb-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full light-glass-panel text-xs font-semibold text-brand-green mb-6 uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+                        Creative Tech Agency
+                    </div>
+                    <h1 class="text-6xl lg:text-8xl font-extrabold font-display leading-[0.9] tracking-tighter mb-6 text-brand-dark">
+                        We Build <br />
+                        <span class="text-brand-green">What Works.</span>
+                    </h1>
+                    <p class="text-lg text-stone-600 mb-10 max-w-lg leading-relaxed">
+                        Practical, scalable digital tools and beautiful infrastructure designed for ambitious, growing businesses. We transform complexity into seamless performance.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#services" class="glossy-pill px-8 py-4 rounded-full font-bold text-white flex items-center gap-2">
+                            Explore Services 
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Floating Glass UI Elements -->
+                <div class="reveal relative h-full hidden lg:block">
+                    <div class="light-glass-panel rounded-[2rem] p-6 absolute top-0 right-10 w-72 transform rotate-3">
+                        <div class="w-12 h-12 rounded-xl bg-teal-50/50 mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-xl text-brand-dark font-display">System Status</h3>
+                        <div class="mt-4 space-y-2">
+                            <div class="h-2 w-full bg-black/5 rounded-full overflow-hidden"><div class="h-full bg-brand-green w-3/4 rounded-full"></div></div>
+                            <div class="h-2 w-full bg-black/5 rounded-full overflow-hidden"><div class="h-full bg-brand-gold w-1/2 rounded-full"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="light-glass-panel rounded-[2rem] p-6 absolute top-40 left-0 w-64 transform -rotate-3 delay-100">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-50/50 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-brand-dark font-display leading-tight">Performance</h3>
+                                <p class="text-xs text-stone-500">Optimized</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end h-16 mt-6 gap-2">
+                            <div class="w-full bg-brand-green/20 rounded-t-md h-[40%]"></div>
+                            <div class="w-full bg-brand-green/40 rounded-t-md h-[60%]"></div>
+                            <div class="w-full bg-brand-green/60 rounded-t-md h-[80%]"></div>
+                            <div class="w-full bg-brand-green/80 rounded-t-md h-[100%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tech Services Grid -->
+        <section id="services" class="py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold font-display mb-4 text-brand-dark tracking-tight">Core <span class="text-brand-green">Capabilities</span></h2>
+                    <p class="text-stone-500 max-w-2xl mx-auto text-lg">Expertise across the digital spectrum, built to scale with your ambition.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+                    <div class="reveal light-glass-panel p-8 rounded-[2rem]">
+                        <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-8 text-brand-green">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-brand-dark font-display">Web Development</h3>
+                        <p class="text-stone-600 leading-relaxed">Custom, responsive websites and web applications built with modern frameworks for speed and reliability.</p>
+                    </div>
+                    
+                    <div class="reveal light-glass-panel p-8 rounded-[2rem] md:mt-12" style="transition-delay: 100ms;">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 text-brand-gold">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-brand-dark font-display">App Development</h3>
+                        <p class="text-stone-600 leading-relaxed">Engaging mobile experiences for iOS and Android that connect with your audience anywhere.</p>
+                    </div>
+
+                    <div class="reveal light-glass-panel p-8 rounded-[2rem]" style="transition-delay: 200ms;">
+                        <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-8 text-brand-green">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-brand-dark font-display">IT Setup</h3>
+                        <p class="text-stone-600 leading-relaxed">Robust office infrastructure, secure networking, and hardware setup for uninterrupted business operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Pantry -->
+        <section id="pantry" class="py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal text-center mb-16">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full light-glass-panel text-xs font-semibold text-brand-gold mb-4 uppercase tracking-wider">
+                        Locally Crafted
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold font-display mb-4 text-brand-dark tracking-tight">The <span class="text-brand-gold">Pantry</span></h2>
+                    <p class="text-stone-500 max-w-2xl mx-auto text-lg">Honest, boldly Ghanaian flavor brought to everyday tables.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+                    <!-- Shito Card -->
+                    <div class="reveal light-glass-panel rounded-2xl flex flex-col overflow-hidden">
+                        <!-- Image correctly pointing to real asset path while retaining requested class structure -->
+                        <img src="../mastermade-enterprise/public/assets/shito_1789311845316.jpeg" alt="MasterMade Shito" class="w-full h-64 object-cover rounded-t-xl">
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold mb-3 font-display">MasterMade Shito</h3>
+                            <p class="text-stone-600 mb-8 flex-grow">A rich, deeply flavorful authentic Ghanaian hot black pepper sauce made with premium ingredients.</p>
+                            <button class="glossy-pill-gold w-full py-4 rounded-full font-bold text-white flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                                Order via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tom Brown Card -->
+                    <div class="reveal light-glass-panel rounded-2xl flex flex-col overflow-hidden" style="transition-delay: 150ms;">
+                        <!-- Image correctly pointing to real asset path while retaining requested class structure -->
+                        <img src="../mastermade-enterprise/public/assets/tombrown_1789311845317.jpeg" alt="MasterMade Tom Brown" class="w-full h-64 object-cover rounded-t-xl">
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold mb-3 font-display">Tom Brown</h3>
+                            <p class="text-stone-600 mb-8 flex-grow">A nutritious, traditional roasted corn porridge mix, perfectly balanced for a hearty breakfast.</p>
+                            <button class="glossy-pill-gold w-full py-4 rounded-full font-bold text-white flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                                Order via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 relative">
+            <div class="max-w-4xl mx-auto px-6 relative z-10">
+                <div class="reveal light-glass-panel p-10 md:p-16 rounded-[3rem]">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-display mb-4 text-brand-dark tracking-tight">Let's build something <span class="text-brand-green">great.</span></h2>
+                        <p class="text-stone-500 text-lg">Reach out for tech services quotes or pantry orders.</p>
+                    </div>
+                    
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-stone-700 pl-4 uppercase tracking-wider">Name</label>
+                                <input type="text" class="w-full bg-white/50 border border-white/60 rounded-[2rem] px-6 py-5 focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:bg-white/80 transition-all text-brand-dark shadow-sm" placeholder="Your name" />
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-stone-700 pl-4 uppercase tracking-wider">Email</label>
+                                <input type="email" class="w-full bg-white/50 border border-white/60 rounded-[2rem] px-6 py-5 focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:bg-white/80 transition-all text-brand-dark shadow-sm" placeholder="your@email.com" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-stone-700 pl-4 uppercase tracking-wider">Message</label>
+                            <textarea rows="4" class="w-full bg-white/50 border border-white/60 rounded-[2rem] px-6 py-5 focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:bg-white/80 transition-all text-brand-dark resize-none shadow-sm" placeholder="Tell us about your project or order..."></textarea>
+                        </div>
+                        <div class="pt-6 text-center">
+                            <button type="submit" class="glossy-pill w-full md:w-auto px-12 py-5 rounded-full font-bold text-white flex items-center justify-center gap-2 mx-auto cursor-pointer text-lg tracking-wide">
+                                Request Quote
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-stone-200/50 pt-16 pb-8 text-center sm:text-left relative z-10">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3 mb-4">
+                        <img src="../mastermade-enterprise/public/assets/Picture1.jpg" alt="MasterMade Logo" class="h-8 w-auto rounded-md shadow-sm border border-black/10">
+                        <span class="font-bold text-lg font-display tracking-tight text-brand-dark">MasterMade.</span>
+                    </div>
+                    <p class="text-sm text-stone-500 max-w-xs mx-auto sm:mx-0">Practical digital tools and infrastructure designed for ambitious, growing businesses.</p>
+                </div>
+                <div class="md:col-span-2 flex flex-col sm:flex-row justify-center sm:justify-end gap-10 sm:gap-20">
+                    <div>
+                        <h4 class="font-bold mb-4 text-brand-green uppercase text-xs tracking-widest">Contact</h4>
+                        <ul class="space-y-3 text-sm text-stone-600 font-medium">
+                            <li>
+                                <a href="mailto:amekudzisaacnewton@gmail.com" class="hover:text-brand-green transition-colors flex items-center justify-center sm:justify-start gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> 
+                                    amekudzisaacnewton@gmail.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tel:0595749197" class="hover:text-brand-green transition-colors flex items-center justify-center sm:justify-start gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> 
+                                    0595749197
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-xs text-stone-400 text-center uppercase tracking-widest">
+                &copy; 2024 MasterMade Enterprise Solutions. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scroll Reveal Logic Fix -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            // Initialization: Hide elements with reveal-hidden BEFORE observer starts 
+            // so they don't pop in abruptly if JS is slow.
+            reveals.forEach(el => {
+                el.classList.add('reveal-hidden');
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Swap hidden state with active state
+                        entry.target.classList.remove('reveal-hidden');
+                        entry.target.classList.add('reveal-active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            reveals.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
