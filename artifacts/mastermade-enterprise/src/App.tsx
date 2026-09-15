@@ -1,5 +1,6 @@
-import { motion, Variants } from 'framer-motion';
-import { ShieldCheck, MonitorSmartphone, Headset, Globe2, Code2, Server, Hammer, ArrowRight, MessageCircle, Network, Mail, CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
+import { ShieldCheck, MonitorSmartphone, Headset, Globe2, Code2, Server, Hammer, ArrowRight, MessageCircle, Network, Mail, CheckCircle2, Menu, X } from 'lucide-react';
 
 // ==========================================
 // UTILS & CONSTANTS
@@ -24,21 +25,54 @@ const staggerContainer: Variants = {
 // ==========================================
 
 function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white/5 backdrop-blur-md border-b border-white/10">
+    <nav className="fixed top-0 z-50 w-full bg-[#022c22]/90 backdrop-blur-md border-b border-white/10 transition-all">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <img src="/assets/mastermade_1789311852714-removebg-preview.png" alt="MasterMade Logo" className="h-10 w-auto rounded-sm" />
         </div>
-        <div className="hidden md:flex gap-8 text-sm font-semibold text-emerald-50">
+        
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-emerald-50">
           <a href="#services" className="hover:text-amber-400 transition-colors">Services</a>
           <a href="#pantry" className="hover:text-amber-400 transition-colors">Pantry</a>
           <a href="#contact" className="hover:text-amber-400 transition-colors">Contact</a>
+          <a href="#contact" className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] text-white rounded-full transition-all font-semibold text-sm">
+            Get in Touch
+          </a>
         </div>
-        <a href="#contact" className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] text-white rounded-full transition-all font-semibold text-sm">
-          Get in Touch
-        </a>
+
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-[#064e3b] border-b border-white/10 overflow-hidden"
+          >
+            <div className="flex flex-col px-6 py-4 gap-4 text-emerald-50 font-semibold">
+              <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-amber-400 transition-colors py-2 border-b border-white/5">Services</a>
+              <a href="#pantry" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-amber-400 transition-colors py-2 border-b border-white/5">Pantry</a>
+              <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-amber-400 transition-colors py-2 border-b border-white/5">Contact</a>
+              <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="inline-block mt-2 px-6 py-3 bg-emerald-500 text-white rounded-full text-center transition-all">
+                Get in Touch
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -82,31 +116,31 @@ function Hero() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative w-full h-[500px] lg:h-[600px] hidden md:flex items-center justify-center"
+          className="relative w-full h-[350px] md:h-[500px] lg:h-[600px] flex items-center justify-center mt-16 md:mt-0"
         >
           {/* Glowing Anchor */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] lg:w-[500px] h-[350px] lg:h-[500px] bg-emerald-400/20 blur-[100px] rounded-full z-0 pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[350px] lg:w-[500px] h-[250px] md:h-[350px] lg:h-[500px] bg-emerald-400/20 blur-[60px] md:blur-[100px] rounded-full z-0 pointer-events-none" />
           
           <motion.img 
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             src="/assets/monitor-mockup-removebg-preview.png" 
             alt="Monitor Mockup"
-            className="absolute top-4 right-4 lg:right-12 w-[350px] lg:w-[500px] z-10 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
+            className="absolute top-0 right-0 md:top-4 md:right-4 lg:right-12 w-[240px] md:w-[350px] lg:w-[500px] z-10 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
           />
           <motion.img 
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             src="/assets/laptop-mockup.png" 
             alt="Laptop Mockup"
-            className="absolute bottom-10 -left-4 lg:-left-16 lg:bottom-12 w-[300px] lg:w-[480px] z-20 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
+            className="absolute bottom-8 left-0 md:bottom-10 md:-left-4 lg:-left-16 lg:bottom-12 w-[200px] md:w-[300px] lg:w-[480px] z-20 drop-shadow-2xl transition-transform duration-700 hover:scale-105" 
           />
           <motion.img 
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             src="/assets/phone-mockup-removebg-preview.png" 
             alt="Phone Mockup"
-            className="absolute bottom-12 right-12 lg:bottom-16 lg:right-24 w-[110px] lg:w-[150px] z-30 drop-shadow-2xl transition-transform duration-700 hover:-translate-y-4" 
+            className="absolute bottom-10 right-4 md:bottom-12 md:right-12 lg:bottom-16 lg:right-24 w-[75px] md:w-[110px] lg:w-[150px] z-30 drop-shadow-2xl transition-transform duration-700 hover:-translate-y-4" 
           />
         </motion.div>
       </div>
@@ -123,9 +157,9 @@ function TrustStrip() {
   ];
 
   return (
-    <section className="bg-emerald-900 text-white py-6 relative z-20 border-b border-emerald-950">
+    <section className="bg-emerald-900 text-white py-8 relative z-20 border-b border-emerald-950">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-wrap items-center justify-between gap-6 md:gap-4">
+        <div className="grid grid-cols-2 lg:flex lg:flex-wrap items-center justify-between gap-6 md:gap-4">
           {items.map((item, i) => (
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
@@ -135,8 +169,8 @@ function TrustStrip() {
               key={i} 
               className="flex items-center gap-3 text-emerald-50"
             >
-              <div className="p-2 bg-white/5 rounded-lg text-amber-400">{item.icon}</div>
-              <span className="text-sm font-semibold tracking-wide">{item.text}</span>
+              <div className="p-2 bg-white/5 rounded-lg text-amber-400 shrink-0">{item.icon}</div>
+              <span className="text-xs md:text-sm font-semibold tracking-wide">{item.text}</span>
             </motion.div>
           ))}
         </div>
@@ -293,7 +327,7 @@ function Footer() {
         >
           <h3 className="text-2xl font-bold mb-6 text-white">Send us a message</h3>
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-emerald-100/70 mb-2">First Name</label>
                 <input type="text" className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors" placeholder="John" />
